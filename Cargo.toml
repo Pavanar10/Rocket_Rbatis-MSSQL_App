@@ -1,0 +1,19 @@
+
+[package]
+name = "rocket_rbatis_app"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = { version = "0.5.0-rc.3", features = ["json"] }
+rbs = { version = "^0.1"}
+rbatis = { version = "^4.5" }
+rbdc-mssql = "4.5"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"] }
+dotenv = "0.15"
+log = "0.4"
+config = "0.13.3"
