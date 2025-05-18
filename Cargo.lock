@@ -521,16 +521,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "env_logger"
-version = "0.8.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a19187fea3ac7e84da7dacf48de0c45d63c6a76f9490dae389aead16c243fce3"
-dependencies = [
- "log",
- "regex",
-]
-
-[[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1368,12 +1358,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "paste"
-version = "1.0.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
-
-[[package]]
 name = "pathdiff"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1547,17 +1531,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "quickcheck"
-version = "1.0.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "588f6378e4dd99458b60ec275b4477add41ce4fa9f64dcba6f15adccb19b50d6"
-dependencies = [
- "env_logger",
- "log",
- "rand 0.8.5",
-]
-
-[[package]]
 name = "quote"
 version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1655,7 +1628,7 @@ dependencies = [
  "rbatis-macro-driver",
  "rbdc",
  "rbdc-pool-fast",
- "rbs 4.5.25",
+ "rbs",
  "serde",
  "sql-parser",
 ]
@@ -1669,7 +1642,7 @@ dependencies = [
  "html_parser",
  "proc-macro2",
  "quote",
- "rbs 4.5.25",
+ "rbs",
  "serde",
  "syn 2.0.101",
  "url",
@@ -1705,7 +1678,7 @@ dependencies = [
  "log",
  "lru",
  "memchr",
- "rbs 4.5.25",
+ "rbs",
  "rustls 0.23.27",
  "rustls-pemfile 2.2.0",
  "serde",
@@ -1731,7 +1704,7 @@ dependencies = [
  "futures-util",
  "log",
  "rbdc",
- "rbs 4.5.25",
+ "rbs",
  "rust_decimal",
  "tiberius",
  "tokio",
@@ -1751,22 +1724,7 @@ dependencies = [
  "futures-core",
  "log",
  "rbdc",
- "rbs 4.5.25",
-]
-
-[[package]]
-name = "rbs"
-version = "0.1.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1538d1d85ae2701308e1ee8de182ab0fc37d6c0fb54b3c39cc0d499b69f76822"
-dependencies = [
- "byteorder",
- "num-traits",
- "quickcheck",
- "rmp",
- "serde",
- "serde_bytes",
- "serde_derive",
+ "rbs",
 ]
 
 [[package]]
@@ -1905,17 +1863,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rmp"
-version = "0.8.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "228ed7c16fa39782c3b3468e974aec2795e9089153cd08ee2e9aefb3613334c4"
-dependencies = [
- "byteorder",
- "num-traits",
- "paste",
-]
-
-[[package]]
 name = "rocket"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2006,7 +1953,7 @@ dependencies = [
  "log",
  "rbatis",
  "rbdc-mssql",
- "rbs 0.1.15",
+ "rbs",
  "rocket",
  "serde",
  "serde_json",

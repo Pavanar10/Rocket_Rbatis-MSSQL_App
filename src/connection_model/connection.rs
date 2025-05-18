@@ -17,15 +17,17 @@ impl Connection{
 
     fn init(&self) {
         let conf: ConnectionConfig = ConnectionConfig::new();
-        self.db.init(
-            MssqlDriver {},
-            format!(
-                "jdbc:sqlserver://{}:{};User={};Password={};Database={}",
-                conf.server, conf.port, conf.user, conf.password, conf.database
-            )
-                .as_str(),
-        )
-            .unwrap();
+
+        let url = format!(
+            "jdbc:sqlserver://{}:{};User={};Password={};Database={}",
+            conf.server, conf.port, conf.user, conf.password, conf.database
+        );
+        println!("{:?}",url);
+        self.db.init(MssqlDriver {},&url)
+            .expect("failed to connect");
+        
+           println!("Successfully established");
+
     }
 
     pub fn create_and_init() -> Connection {
@@ -51,7 +53,7 @@ impl ConnectionConfig {
             .add_source(config::File::with_name("Connection"))
             .build()
         {
-            Ok(c) => c,
+            Ok(c) =>{ println!("successful");  c},
             Err(_) => {
                 panic!("Connection properties file not found.");
             }

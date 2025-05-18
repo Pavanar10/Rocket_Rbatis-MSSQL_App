@@ -1,3 +1,2 @@
 pub mod  connection;
-
-extern crate rbatis;
+pub mod user;
