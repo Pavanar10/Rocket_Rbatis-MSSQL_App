@@ -1,4 +1,4 @@
-use rbatis::rbdc::db::ExecResult;
+
 use rbatis::{crud,RBatis,};
 use rocket::State;
 use serde_json::json;
@@ -22,23 +22,33 @@ impl UserConnection {
         }
     }
 
-    pub async fn add_user(conn: &State<Connection>,user: UserDetails) -> String {
+    pub async fn add_user(conn: &State<Connection>,user: UserDetails) -> Result<String,rbatis::Error> {
         match UserDetails::insert( &conn.db, &user).await {
-            Ok(r) => r,
-            Err(e) => panic!("Can't insert object {:?}", e)
-        };
-        let id: u64 = UserConnection::get_scope_identity(&conn.db).await;
-        let mut created_user: Vec<UserDetails> = UserDetails::select_by_column(&conn.db, "user_id", id).await.unwrap();
-        json!(created_user.remove(0)).to_string()
+            Ok(_) => {
+                let id: u64 = UserConnection::get_scope_identity(&conn.db).await;
+                let mut created_user: Vec<UserDetails> = UserDetails::select_by_column(&conn.db, "user_id", id).await.unwrap();
+                Ok(json!(created_user.remove(0)).to_string())
+            },
+            Err(e) => {
+                 println!("Can't insert object {:?}", e);
+                 Err(e)
+            }
+        }
+       
     }
 
-    pub async fn update_user(conn: &State<Connection>,user: UserDetails) -> String {
+    pub async fn update_user(conn: &State<Connection>,user: UserDetails) -> Result<String,rbatis::Error> {
        // let id = &user.user_id.unwrap();
         match UserDetails::update_by_column(&conn.db, &user, "user_id").await {
-            Ok(r) => r,
-            Err(e) => panic!("Can't insert object {:?}", e)
-        };
-        json!(user).to_string()
+            Ok(_) => {
+                Ok(json!(user).to_string())
+            },
+            Err(e) =>{
+                 println!("Can't insert object {:?}", e);
+                 Err(e)
+            }
+        }
+       
     }
 
     pub async fn get_scope_identity(conn: &RBatis) -> u64 {
@@ -51,8 +61,8 @@ impl UserConnection {
 
     pub async fn delete_user(conn: &State<Connection>,id: u32) {
          match UserDetails::delete_by_column(&conn.db, "userid", &id).await {
-            Ok(ExecResult)=>{
-                println!("Rows affected {} and Last Inserted ID {}",ExecResult.rows_affected,ExecResult.last_insert_id);
+            Ok(result)=>{
+                println!("Rows affected {} and Last Inserted ID {}",result.rows_affected,result.last_insert_id);
             }
             Err(e)=>{
                 println!("Error while deleting {}",e);

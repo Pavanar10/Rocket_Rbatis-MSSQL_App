@@ -13,7 +13,7 @@ pub async fn get_users(conn: &State<Connection>) -> String {
 
 #[post("/add_user", data = "<user>")]
 pub async fn add_user<'r>(conn: &State<Connection>, user: Json<UserDetails>) -> status::Created<String> {
-    let result: String = UserConnection::add_user(conn, user.into_inner()).await;
+    let result= UserConnection::add_user(conn, user.into_inner()).await.unwrap();
     let url = "http://vrynt812:4200/spekkies".to_string();
     status::Created::new(url).tagged_body(result)
 }
@@ -25,7 +25,7 @@ pub async fn delete_user(conn: &State<Connection>,id:u32){
 
 #[patch("/update_user",data="<user>")]
 pub async fn update_user(conn: &State<Connection>,user: Json<UserDetails>)->String{
-    let res = UserConnection::update_user(conn, user.into_inner()).await;
+    let res = UserConnection::update_user(conn, user.into_inner()).await.unwrap();
     res
 }
 
